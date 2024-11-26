@@ -2,12 +2,10 @@ const inputBtn = document.getElementById("input-btn");
 let myLeads = [];
 const inputEl = document.getElementById("input-el");
 const ulEl = document.getElementById("ul-el");
+const tabBtn = document.getElementById("tab-btn");
+const deleteBtn = document.getElementById("delete-btn");
 
-// Get the leads from the localStorage    – use: JSON.parse()
-// Store it in a variable called leadsFromLocalStorage
-// Log out the variableNe
 let leadsFromLocalStorage = JSON.parse(localStorage.getItem("myLeads"));
-console.log(leadsFromLocalStorage);
 if (leadsFromLocalStorage) {
    myLeads = leadsFromLocalStorage;
    renderLeads();
@@ -16,11 +14,22 @@ if (leadsFromLocalStorage) {
 inputBtn.addEventListener("click", function() {
    myLeads.push(inputEl.value);
    inputEl.value = "";
-   // Save the myLeads array to localStorage
    localStorage.setItem("myLeads", JSON.stringify(myLeads));
    renderLeads();
-   // To verify that it works:
-   console.log( localStorage.getItem("myLeads") );
+});
+
+tabBtn.addEventListener("click", function() {
+   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      myLeads.push(tabs[0].url);
+      localStorage.setItem("myLeads", JSON.stringify(myLeads));
+      renderLeads();
+   });
+});
+
+deleteBtn.addEventListener("click", function() {
+   myLeads = [];
+   localStorage.removeItem("myLeads");
+   renderLeads();
 });
 
 function renderLeads() {

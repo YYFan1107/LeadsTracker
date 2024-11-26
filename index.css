@@ -5,14 +5,9 @@ body {
     min-width: 450px;
 }
 
-/*
-Style our app according to the provided design!
-green color -> #5f9341
-*/
-
 input {
     display: block;
-    width: 40%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 5px;
     border: 2px solid #5f9341;
@@ -31,15 +26,18 @@ input:focus {
 }
 
 button {
-    display: block;
     background-color: #5f9341;
     color: white;
     padding: 10px 15px;
-    border: none;
+    border: 2px solid #5f9341;
     font-size: 16px;
 }
 
-/* STYLE THE LIST ACCORDING TO THE DESIGN */
+#delete-btn {
+    background-color: white;
+    color: #5f9341;
+}
+
 ul {
     list-style: none;
     padding: 0;
